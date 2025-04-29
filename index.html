@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClimApp | Pronóstico del Tiempo</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="responsive.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Animated Weather Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons-wind.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Fondo dinámico -->
+    <div class="background-container">
+      <div class="stars-container">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+      </div>
+    </div>
+
+    <div class="app-wrap">
+      <header>
+        <div class="search-container">
+          <input type="text" autocomplete="off" class="search-box" placeholder="Buscar ciudad..." aria-label="Buscar ciudad">
+          <button class="location-btn" aria-label="Usar mi ubicación">
+            <i class="wi wi-location-marker"></i>
+          </button>
+        </div>
+        <div class="unit-toggle">
+          <button class="unit-btn active" data-unit="metric">°C</button>
+          <button class="unit-btn" data-unit="imperial">°F</button>
+        </div>
+        <button class="theme-toggle" aria-label="Cambiar tema">
+          <i class="wi wi-day-sunny"></i>
+        </button>
+      </header>
+
+      <main>
+        <section class="current-weather">
+          <div class="location-info">
+            <div class="city-container">
+              <i class="wi wi-location-marker"></i>
+              <h1 class="city">Ciudad</h1>
+            </div>
+            <p class="date">Fecha</p>
+          </div>
+
+          <div class="weather-info">
+            <div class="weather-icon">
+              <i class="wi wi-day-sunny"></i>
+            </div>
+            <div class="temp-container">
+              <h2 class="temp">--<span>°C</span></h2>
+              <p class="weather-description">Clima</p>
+            </div>
+          </div>
+
+          <div class="weather-details">
+            <div class="detail-item">
+              <i class="wi wi-thermometer"></i>
+              <div class="detail-info">
+                <span class="detail-label">Mín/Máx</span>
+                <span class="hi-low">-- / --</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="wi wi-strong-wind"></i>
+              <div class="detail-info">
+                <span class="detail-label">Viento</span>
+                <span class="wind">-- m/s</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="wi wi-humidity"></i>
+              <div class="detail-info">
+                <span class="detail-label">Humedad</span>
+                <span class="humidity">--%</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="wi wi-barometer"></i>
+              <div class="detail-info">
+                <span class="detail-label">Presión</span>
+                <span class="pressure">-- hPa</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="wi wi-cloudy"></i>
+              <div class="detail-info">
+                <span class="detail-label">Nubes</span>
+                <span class="clouds">--%</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="wi wi-thermometer-exterior"></i>
+              <div class="detail-info">
+                <span class="detail-label">Sensación</span>
+                <span class="feels-like">--°</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="forecast">
+          <h2 class="forecast-title">Pronóstico de 5 días</h2>
+          <div class="forecast-container">
+            <!-- Los elementos del pronóstico se generarán dinámicamente con JavaScript -->
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>Desarrollado con ❤️ | Datos proporcionados por OpenWeather</p>
+      </footer>
+    </div>
+  </div>
+
+  <div class="loader">
+    <div class="loader-icon">
+      <i class="wi wi-day-sunny"></i>
+    </div>
+    <p>Cargando datos del clima...</p>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
