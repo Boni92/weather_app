@@ -27,6 +27,7 @@ export default function Home() {
     show: false,
     message: "",
   })
+  const [language, setLanguage] = useState<"ES" | "EN">("ES")
   const liveTrackingIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const { theme, setTheme } = useTheme()
 
@@ -226,13 +227,26 @@ export default function Home() {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-white drop-shadow-md">Weather App</h1>
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun className="text-yellow-300" /> : <Moon className="text-slate-700" />}
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setLanguage(language === "ES" ? "EN" : "ES")}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
+              aria-label="Toggle language"
+            >
+              <span className="text-white font-medium">{language}</span>
+            </button>
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <Sun className="w-6 h-6 text-yellow-300" />
+              ) : (
+                <Moon className="w-6 h-6 text-slate-700" />
+              )}
+            </button>
+          </div>
         </div>
 
         <div className="grid gap-6">
@@ -279,9 +293,18 @@ export default function Home() {
 
           {weather && !loading && (
             <>
-              <WeatherCard weather={weather} units={units} isLiveTracking={isLiveTracking} />
+              <WeatherCard 
+                weather={weather} 
+                units={units} 
+                isLiveTracking={isLiveTracking}
+                language={language}
+              />
 
-              <WeatherDetails weather={weather} units={units} />
+              <WeatherDetails 
+                weather={weather} 
+                units={units}
+                language={language}
+              />
 
               {forecast && <ForecastSection forecast={forecast} units={units} />}
             </>

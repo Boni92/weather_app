@@ -1,4 +1,5 @@
 import { Cloud, CloudDrizzle, CloudFog, CloudLightning, CloudRain, CloudSnow, Sun, Wind } from "lucide-react"
+import { translations } from "./translations"
 
 export function getWeatherIcon(weatherMain: string) {
   const iconMap: Record<string, any> = {
@@ -25,66 +26,98 @@ export function getWeatherBackground(weatherMain: string) {
   const backgrounds: Record<string, Record<string, any>> = {
     Clear: {
       day: {
-        backgroundImage: "linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%)",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
       night: {
-        backgroundImage: "linear-gradient(to bottom, #0c1445 0%, #1e3a8a 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
     Clouds: {
       day: {
-        backgroundImage: "linear-gradient(to bottom, #8e9eab 0%, #eef2f3 100%)",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
       night: {
-        backgroundImage: "linear-gradient(to bottom, #2c3e50 0%, #4c5c68 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
     Rain: {
       day: {
-        backgroundImage: "linear-gradient(to bottom, #616161 0%, #9bc5c3 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
       night: {
-        backgroundImage: "linear-gradient(to bottom, #1f1c2c 0%, #4c5c68 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
     Drizzle: {
       day: {
-        backgroundImage: "linear-gradient(to bottom, #89f7fe 0%, #66a6ff 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
       night: {
-        backgroundImage: "linear-gradient(to bottom, #141e30 0%, #243b55 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
     Thunderstorm: {
       day: {
-        backgroundImage: "linear-gradient(to bottom, #373b44 0%, #4286f4 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
       night: {
-        backgroundImage: "linear-gradient(to bottom, #0f0c29 0%, #302b63 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
     Snow: {
       day: {
-        backgroundImage: "linear-gradient(to bottom, #e6e9f0 0%, #eef1f5 100%)",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
       night: {
-        backgroundImage: "linear-gradient(to bottom, #8e9eab 0%, #eef2f3 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
     Mist: {
       day: {
-        backgroundImage: "linear-gradient(to bottom, #d7d2cc 0%, #304352 100%)",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
       night: {
-        backgroundImage: "linear-gradient(to bottom, #232526 0%, #414345 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
     Fog: {
       day: {
-        backgroundImage: "linear-gradient(to bottom, #d7d2cc 0%, #304352 100%)",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
       night: {
-        backgroundImage: "linear-gradient(to bottom, #232526 0%, #414345 100%)",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/sunny2.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
   }
@@ -94,4 +127,9 @@ export function getWeatherBackground(weatherMain: string) {
 
 export function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
+}
+
+export const translate = (key: string, language: "ES" | "EN", category: keyof typeof translations) => {
+  const lang = language.toLowerCase() as "es" | "es"
+  return translations[category][lang][key] || key
 }

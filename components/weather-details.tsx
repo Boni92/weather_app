@@ -2,13 +2,15 @@
 
 import { Thermometer, Wind, Droplets, BarChart2, Sunrise, Sunset } from "lucide-react"
 import { motion } from "framer-motion"
+import { translate } from "@/lib/utils"
 
 interface WeatherDetailsProps {
   weather: any
   units: string
+  language: "ES" | "EN"
 }
 
-export default function WeatherDetails({ weather, units }: WeatherDetailsProps) {
+export default function WeatherDetails({ weather, units, language }: WeatherDetailsProps) {
   const formatTime = (timestamp: number) => {
     const date = new Date(timestamp * 1000)
     return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
@@ -42,7 +44,9 @@ export default function WeatherDetails({ weather, units }: WeatherDetailsProps) 
         <motion.div variants={item} className="bg-white/10 dark:bg-slate-700/30 p-4 rounded-lg flex items-center gap-3">
           <Thermometer className="text-red-400" size={24} />
           <div>
-            <p className="text-white/70 text-sm">Feels like</p>
+            <p className="text-white/70 text-sm">
+              {translate("Feels like", language, "weatherDetails")}
+            </p>
             <p className="text-white font-semibold">
               {Math.round(weather.main.feels_like)}°{units === "metric" ? "C" : "F"}
             </p>
@@ -52,7 +56,9 @@ export default function WeatherDetails({ weather, units }: WeatherDetailsProps) 
         <motion.div variants={item} className="bg-white/10 dark:bg-slate-700/30 p-4 rounded-lg flex items-center gap-3">
           <Droplets className="text-blue-400" size={24} />
           <div>
-            <p className="text-white/70 text-sm">Humidity</p>
+            <p className="text-white/70 text-sm">
+              {translate("Humidity", language, "weatherDetails")}
+            </p>
             <p className="text-white font-semibold">{weather.main.humidity}%</p>
           </div>
         </motion.div>
@@ -60,7 +66,9 @@ export default function WeatherDetails({ weather, units }: WeatherDetailsProps) 
         <motion.div variants={item} className="bg-white/10 dark:bg-slate-700/30 p-4 rounded-lg flex items-center gap-3">
           <Wind className="text-teal-400" size={24} />
           <div>
-            <p className="text-white/70 text-sm">Wind</p>
+            <p className="text-white/70 text-sm">
+              {translate("Wind", language, "weatherDetails")}
+            </p>
             <p className="text-white font-semibold">
               {weather.wind.speed} {units === "metric" ? "m/s" : "mph"}
             </p>
@@ -70,7 +78,9 @@ export default function WeatherDetails({ weather, units }: WeatherDetailsProps) 
         <motion.div variants={item} className="bg-white/10 dark:bg-slate-700/30 p-4 rounded-lg flex items-center gap-3">
           <BarChart2 className="text-purple-400" size={24} />
           <div>
-            <p className="text-white/70 text-sm">Pressure</p>
+            <p className="text-white/70 text-sm">
+              {translate("Pressure", language, "weatherDetails")}
+            </p>
             <p className="text-white font-semibold">{weather.main.pressure} hPa</p>
           </div>
         </motion.div>

@@ -1,26 +1,31 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getWeatherIcon } from "@/lib/utils"
+import { getWeatherIcon, translate } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { Locate } from "lucide-react"
+import { Wind, Droplets } from "lucide-react"
 
 interface WeatherCardProps {
   weather: any
   units: string
   isLiveTracking?: boolean
+  language: "ES" | "EN"
 }
 
-export default function WeatherCard({ weather, units, isLiveTracking = false }: WeatherCardProps) {
+export default function WeatherCard({ weather, units, isLiveTracking = false, language }: WeatherCardProps) {
   const [dateTime, setDateTime] = useState(new Date())
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setDateTime(new Date())
+      const localTime = new Date()
+      const timezoneOffset = weather.timezone / 3600
+      localTime.setHours(localTime.getHours() + timezoneOffset)
+      setDateTime(localTime)
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [weather.timezone])
 
   const formatDate = (date: Date) => {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -43,7 +48,11 @@ export default function WeatherCard({ weather, units, isLiveTracking = false }: 
   }
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
+    return date.toLocaleTimeString("en-US", { 
+      hour: "2-digit", 
+      minute: "2-digit",
+      timeZone: "UTC"
+    })
   }
 
   const WeatherIcon = getWeatherIcon(weather.weather[0].main)
@@ -64,10 +73,10 @@ export default function WeatherCard({ weather, units, isLiveTracking = false }: 
                 {weather.sys.country}
               </span>
               {isLiveTracking && (
-                <span className="flex items-center gap-1 text-sm bg-green-500/70 px-2 py-1 rounded-full">
-                  <Locate size={14} className="animate-pulse" />
-                  <span>Live</span>
-                </span>
+                <div className="flex items-center gap-2 bg-green-500/20 px-3 py-1 rounded-full">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <span className="text-green-500 text-sm">Live</span>
+                </div>
               )}
             </h2>
             <p className="text-white/80 mt-1">{formatDate(dateTime)}</p>
@@ -83,7 +92,10 @@ export default function WeatherCard({ weather, units, isLiveTracking = false }: 
               {Math.round(weather.main.temp)}°{units === "metric" ? "C" : "F"}
             </motion.div>
             <p className="text-white/80 mt-1">
-              Feels like: {Math.round(weather.main.feels_like)}°{units === "metric" ? "C" : "F"}
+              {translate(weather.weather[0].main, language, "weatherConditions")}
+            </p>
+            <p className="text-white/80 mt-1">
+              {translate("Feels like", language, "weatherDetails")}: {Math.round(weather.main.feels_like)}°{units === "metric" ? "C" : "F"}
             </p>
           </div>
         </div>
@@ -112,13 +124,20 @@ export default function WeatherCard({ weather, units, isLiveTracking = false }: 
           </div>
           <div className="text-center">
             <p className="font-semibold">Wind</p>
-            <p>
-              {weather.wind.speed} {units === "metric" ? "m/s" : "mph"}
-            </p>
+            <div className="flex items-center gap-2">
+              <Wind className="text-white/80" />
+              <p>
+                {weather.wind.speed} {units === "metric" ? "m/s" : "mph"}
+              </p>
+            </div>
           </div>
           <div className="text-center">
             <p className="font-semibold">Clouds</p>
             <p>{weather.clouds.all}%</p>
+          </div>
+          <div className="text-center">
+            <p className="font-semibold">Humidity</p>
+            <p>{weather.main.humidity}%</p>
           </div>
         </div>
       </div>
